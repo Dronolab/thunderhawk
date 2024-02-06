@@ -1,8 +1,8 @@
-name: ROS2 rove build
-run-name: ${{ github.actor }} is working on ROS2 rove build
+name: ROS2 thunderhawk build
+run-name: ${{ github.actor }} is working on ROS2 thunderhawk build
 on: [push]
 jobs:
-  Build_rove:
+  Build_thunderhawk:
     runs-on: ubuntu-latest
     permissions:
       packages: write
