@@ -1,8 +1,8 @@
-FROM ghcr.io/clubcapra/gazebo:harmonic
+FROM dronolab/simulation:latest
 
 # Add vscode user with same UID and GID as your host system
 # (copied from https://code.visualstudio.com/remote/advancedcontainers/add-nonroot-user#_creating-a-nonroot-user)
-ARG USERNAME=rove
+ARG USERNAME=thunderhawk
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
@@ -22,6 +22,9 @@ RUN apt update && apt upgrade -y
 # Install Git
 RUN apt install -y git
 
+# Give user access to workdir
+RUN chown -R $USERNAME:$USERNAME ./
+
 # Copy to preload the ros packages
 COPY ./ /workspace/$USERNAME/
 
@@ -34,4 +37,3 @@ RUN rosdep install --from-paths src --ignore-src --rosdistro humble -y
 
 # Source the ROS setup file
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
-RUN echo "source /gazebo/gazebo_ws/install/setup.bash" >> ~/.bashrc
