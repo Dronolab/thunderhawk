@@ -2,7 +2,7 @@
   "name": "humble desktop",
   "dockerComposeFile": "../docker-compose.yml",
   "service": "devcontainer",
-  "workspaceFolder": "/workspace/rove",
+  "workspaceFolder": "/workspace/thunderhawk",
   "mounts": [
     "source=${localEnv:HOME}${localEnv:USERPROFILE}/.bash_history,target=/home/vscode/.bash_history,type=bind"
   ],
