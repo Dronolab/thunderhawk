@@ -1,10 +1,10 @@
-# Rove
+# Thunderhawk
 
-Rove is a robot developed by the Capra team at ÉTS. Utilizing ROS2 Humble, Rove is designed for advanced applications in search and rescue robotics.
+Thunderhawk is a drone developed by the Dronolab team at ÉTS. Utilizing ROS2 Humble, Thunderhawk is designed for advanced applications such as passenger transport and package delivery.
 
 ## Work in a docker container (Preferred)
 
-Working in a dev container will allow you to have the same environnement as the CI and make sure that your code will work on another computer. It will also allow you to easily switch package version and test thing without breaking your computer.
+Working in a dev container will allow you to have the same environnement as the CI and make sure that your code will work on another computer. It will also allow you to easily switch package version and test things without breaking your computer.
 
 ### Windows installation
 
@@ -19,17 +19,11 @@ Working in a dev container will allow you to have the same environnement as the 
 
 ### Linux installation
 
-Same as the windows installation, step 4 and 8 can be skiped.
+Same as the windows installation, step 3 and 8 can be skiped.
 
-Replace the DISPLAY environemnt variable in the .env file
+Replace the DISPLAY environment variable in the .env file
 ```bash
 echo DISPLAY=$DISPLAY
-```
-
-To be able to use the controller node, the user need read/write permissions on the inputs.
-Exemple:
-```bash
-cat /dev/input/event0
 ```
 
 **Suggestion:** Configure docker to be able to run as non-root user https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
@@ -37,8 +31,8 @@ cat /dev/input/event0
 ## Native installation (Ubuntu 22.04 LTS, other distros not supported)
 
 ```bash
-git clone https://github.com/clubcapra/rove.git
-vcs import src < rove.repos
+git clone https://github.com/dronolab/thunderhawk.git
+vcs import src < thunderhawk.repos
 colcon build --symlink-install
 source install/setup.bash
 ```
@@ -46,62 +40,35 @@ source install/setup.bash
 ## Running Rove in simulation
 
 ```bash
-colcon build --symlink-install
+colcon build --packages-skip px4_msgs --symlink-install
 source install/setup.bash
-ros2 launch rove_description sim.launch.py
-```
-
-## Running the controller with a usb cable
-
-```bash
-source install/setup.bash
-ros2 launch rove_bringup rove_controller_usb.launch.py
-```
-
-## Running the controller with a usb cable
-
-```bash
-source install/setup.bash
-ros2 launch rove_bringup rove_controller_bluethoot.launch.py
+ros2 launch thunderhawk_description sim.launch.py
 ```
 
 ## Adding New Packages
 
-To add a package for Rove, create it using the ROS2 command ([Creating Your First ROS2 Package](https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html)). Name it starting with `rove_` to ensure Git tracking. For non-Rove specific packages, create a separate repository and add it to `rove.repos`.
+To add a package for Thunderhawk, create it using the ROS2 command ([Creating Your First ROS2 Package](https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html)). Name it starting with `thunderhawk_` to ensure Git tracking. For non-Rove specific packages, create a separate repository and add it to `thunderhawk.repos`.
 
 ## Updating Packages
 
-Update Rove-specific packages directly in this repository. For Capra-related or external packages, update their references in `rove.repos`. Change the Git branch in `rove.repos` as needed and apply updates with `vcs import src < rove.repos`.
+Update Thunderhawk-specific packages directly in this repository. For Dronolab-related or external packages, update their references in `thunderhawk.repos`. Change the Git branch in `thunderhawk.repos` as needed and apply updates with `vcs import src < rove.repos`.
 
-## Package structure
+## Potential package structure
 
 **Bringup:**
-This essential package is responsible for initializing the rover in real-world settings. It activates all necessary subsidiary packages tailored for specific operational scenarios.
+This essential package is responsible for initializing the drone in real-world settings. It activates all necessary subsidiary packages tailored for specific operational scenarios.
 
 **Description:**
-This package is specifically designed for detailing the rover's structure in URDF (Unified Robot Description Format).
+This package is specifically designed for detailing the drone's structure in URDF (Unified Robot Description Format).
 
 **Gazebo:**
-This package facilitates the simulation of the rover within the Gazebo environment, providing a virtual testing ground.
+This package facilitates the simulation of the drone within the Gazebo environment, providing a virtual testing ground.
 
 **Hardware:**
-Dedicated to initializing all sensors and actuators on the rover, this package is pivotal for operational readiness. It is specifically designed for use with the actual hardware and is not suitable for development machines.
+Dedicated to initializing all sensors and actuators on the drone, this package is pivotal for operational readiness. It is specifically designed for use with the actual hardware and is not suitable for development machines.
 
 **Navigation:**
 This is a wrapper package that integrates navigation functionalities, primarily based on the nav2 framework.
 
-**NLP (Natural Language Processing):**
-This package manages the deployment of the NLP server and chatbot, facilitating advanced communication and processing capabilities.
-
 **SLAM (Simultaneous Localization and Mapping):**
-This package serves as a comprehensive wrapper for SLAM operations, incorporating tools like slam_toolbox, rtab map, and sensor filters for effective environment mapping and rover localization.
-
-## Docker architecture
-
-It's possible to run the entire project into multiple docker containers. Each container can be run independantly and are built using the following structure :
-
-![Docker structure](https://www.plantuml.com/plantuml/svg/VP71Ri8m38RlUOgezwvZq8vnc3XmsLDKJkgLGEj4JbfjU_gr0QgWJHoGVjl_xtouUn-0mz1tyc3r6Ldwm8CE0wCGmOGEPNOTVFJGeZoWGsgGj46V2S6e0r0xszgZvYTZ2zqDIeDZA5huGMLtH-3Uaj6P12zlHPfawulfjpiElUemRz2VWtNHFhNhQ_qWCSbSWSSbCXUfdyOB6uscCL0O3w3ZWgzjLLURUS5BVLbMA_rPhak4jNfhLXLiomq0gjNhymfK2TigFdB2u2tLbWs9Ux1n_WEZjXJ0479qJmtihEkHGhrC_iGOl5F8_9qx4sFip0Fx1I6V4HAa922IPsMUlzyTCz5njdoNcuZT_y55jg3A2NLsBbUNOb6nxSnTy8G-M98HEXhIGoOwdINvFL8pz9tu1G00 "Docker structure")
-
-# Documentation
-
-To update the UML diagram, create a new encoded link on the PlantUML website. Copy the existing UML, make your changes, and then update the markdown file with the new link.
+This package serves as a comprehensive wrapper for SLAM operations, incorporating tools like slam_toolbox, rtab map, and sensor filters for effective environment mapping and drone localization.
