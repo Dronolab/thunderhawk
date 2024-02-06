@@ -5,12 +5,9 @@ services:
       context: .
       dockerfile: ./.devcontainer/Dockerfile
     volumes:
-      - ./:/workspace/rove
+      - ./:/workspace/thunderhawk
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /tmp/.Xauthority:/tmp/.Xauthority:rw
-      - /dev/input:/dev/input:rw
-    devices:
-      - /dev/input:/dev/input:rw
     env_file:
       - .env
     command: sleep infinity

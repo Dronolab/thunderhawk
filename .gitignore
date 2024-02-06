@@ -5,7 +5,7 @@ install/
 
 # Ignore everything in src except rove_*
 src/*
-!src/rove_*
+!src/thunderhawk_*
 
 # Ignore Python bytecodes
 __pycache__/
