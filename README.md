@@ -37,12 +37,12 @@ colcon build --symlink-install
 source install/setup.bash
 ```
 
-## Running Rove in simulation
+## Running Thunderhawk in simulation
 
 ```bash
 colcon build --packages-skip px4_msgs --symlink-install
 source install/setup.bash
-ros2 launch thunderhawk_description sim.launch.py
+ros2 launch _______
 ```
 
 ## Adding New Packages
