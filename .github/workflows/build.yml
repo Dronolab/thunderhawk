@@ -13,7 +13,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Install VCS
-      run: sudo apt install python3-vcstool -y
+      run: sudo pip3 install vcstool
     
     - name: Add repositories from thunderhawk.repos
       run: vcs import src < thunderhawk.repos
