@@ -12,6 +12,9 @@ jobs:
     - name: Check out the repository
       uses: actions/checkout@v2
 
+    - name: Add repositories from thunderhawk.repos
+      run: vcs import src < thunderhawk.repos
+      
     - name: Build docker compose
       run: |
         docker compose run --user root devcontainer bash -c "colcon build"
