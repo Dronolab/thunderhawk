@@ -16,7 +16,7 @@ jobs:
       run: pip3 install vcstool
 
     - name: Add repositories from thunderhawk.repos
-      run: vcs import /src < thunderhawk.repos
+      run: vcs import src < thunderhawk.repos
       
     - name: Build docker compose
       run: docker compose run --user root devcontainer bash -c "colcon build"
