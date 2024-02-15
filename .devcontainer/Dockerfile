@@ -1,4 +1,4 @@
-FROM ghcr.io/dronolab/simulation:latest
+FROM ghcr.io/dronolab/px4-ros2-humble:latest
 
 # Add vscode user with same UID and GID as your host system
 # (copied from https://code.visualstudio.com/remote/advancedcontainers/add-nonroot-user#_creating-a-nonroot-user)
@@ -25,6 +25,10 @@ RUN chown -R $USERNAME:$USERNAME ./
 
 # Copy to preload the ros packages
 COPY ./ /workspace/$USERNAME/
+
+# Copy gazebo models and worlds
+COPY ./models /PX4-Autopilot/Tools/gz/models
+COPY ./worlds /PX4-Autopilot/Tools/gz/worlds
 
 # Change user
 USER $USERNAME

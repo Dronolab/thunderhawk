@@ -8,8 +8,11 @@ services:
       - ./:/workspace/thunderhawk
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /tmp/.Xauthority:/tmp/.Xauthority:rw
-    env_file:
-      - .env
+    environment:
+      - QT_X11_NO_MITSHM=1
+      - DISPLAY=$DISPLAY
+      - XAUTHORITY=$XAUTHORITY
+      - ROS_DOMAIN_ID=96
     command: sleep infinity
     network_mode: "host"
     privileged: true
