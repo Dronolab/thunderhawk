@@ -6,7 +6,6 @@ install/
 # Ignore everything in src except thunderhawk_*
 src/*
 !src/thunderhawk_*
-!src/.gitkeep
 
 # Ignore Python bytecodes
 __pycache__/
