@@ -12,7 +12,6 @@ services:
       - /tmp/.Xauthority:/tmp/.Xauthority:rw
     environment:
       - QT_X11_NO_MITSHM=1
-      - DISPLAY=${DISPLAY}
       - XAUTHORITY=$XAUTHORITY
       - ROS_DOMAIN_ID=96
     command: sleep infinity
