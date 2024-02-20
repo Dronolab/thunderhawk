@@ -4,15 +4,23 @@ services:
     build:
       context: .
       dockerfile: ./.devcontainer/Dockerfile
+    env_file:
+      - .env
     volumes:
       - ./:/workspace/thunderhawk
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /tmp/.Xauthority:/tmp/.Xauthority:rw
     environment:
       - QT_X11_NO_MITSHM=1
-      - DISPLAY=$DISPLAY
+      - DISPLAY=${DISPLAY}
       - XAUTHORITY=$XAUTHORITY
       - ROS_DOMAIN_ID=96
     command: sleep infinity
     network_mode: "host"
     privileged: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: ["nvidia-compute"]
+              driver: nvidia

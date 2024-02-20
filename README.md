@@ -6,48 +6,47 @@ Thunderhawk is a drone developed by the Dronolab team at ÉTS. Utilizing ROS2 Hu
 
 Working in a dev container will allow you to have the same environnement as the CI and make sure that your code will work on another computer. It will also allow you to easily switch package version and test things without breaking your computer.
 
-### Windows installation
+### Installation
 
+0. (Only for Windows Users) Install WSL2
+```bash
+wsl --install
+wsl --install -d Ubuntu
+wsl --set-default Ubuntu 22.04
+```
 1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop)
 2. Install [Visual Studio Code](https://code.visualstudio.com/)
-3. Install Xserver (We recommend [VcXsrv](https://sourceforge.net/projects/vcxsrv/))
-4. Install the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension in VSCode
-5. Clone and open the repository
-6. Click on the green button in the bottom left corner of VSCode and select "Remote-Containers: Reopen in Container" or use the command palette to do it.
-7. Wait for the container to build
-8. Start Xserver with the ```-nowgl``` option (double click on the shortcut to open it if you use VcXsrv)
-
-### Linux installation
-
-Same as the windows installation, step 3 and 8 can be skipped.
-
-Replace the DISPLAY environment variable in the .env file
+3. Install the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) and [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) extension in VSCode
+4. Clone and open the repository (Do on WSL2 if on Windows)
 ```bash
-echo DISPLAY=$DISPLAY
+git clone git@github.com:Dronolab/thunderhawk.git
+cd thunderhawk
+code .
 ```
+5. Import repos from thunderhawk.repos file
+```bash
+vcs import src < thunderhawk.repos
+```
+6. Run the setup script before first use
+```bash
+sh setup.sh
+```
+7. Click on the green button in the bottom left corner of VSCode and select "Dev Containers: Reopen in Container" or use the command palette to do it.
+8. Wait for the container to build
 
 **Suggestion:** Configure docker to be able to run as non-root user https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
-
-## Native installation (Ubuntu 22.04 LTS, other distros not supported)
-
-```bash
-git clone https://github.com/dronolab/thunderhawk.git
-vcs import src < thunderhawk.repos
-colcon build --symlink-install
-source install/setup.bash
-```
 
 ## Running Thunderhawk in simulation
 
 ```bash
-colcon build --packages-skip px4_msgs --symlink-install
+colcon build --symlink-install
 source install/setup.bash
 ros2 launch _______
 ```
 
 ## Adding New Packages
 
-To add a package for Thunderhawk, create it using the ROS2 command ([Creating Your First ROS2 Package](https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html)). Name it starting with `thunderhawk_` to ensure Git tracking. For non-Rove specific packages, create a separate repository and add it to `thunderhawk.repos`.
+To add a package for Thunderhawk, create it using the ROS2 command ([Creating Your First ROS2 Package](https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html)). Name it starting with `thunderhawk_` to ensure Git tracking. For non-Thunderhawk specific packages, create a separate repository and add it to `thunderhawk.repos`.
 
 ## Updating Packages
 

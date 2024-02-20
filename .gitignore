@@ -17,3 +17,4 @@ __pycache__/
 
 # Ignore files related to your dev environment
 .vscode/
+.env
