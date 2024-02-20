@@ -17,6 +17,9 @@ jobs:
 
     - name: Add repositories from thunderhawk.repos
       run: vcs import src < thunderhawk.repos
+
+    - name: Run setup.sh
+      run: sh setup.sh
       
     - name: Build docker compose
       run: docker compose run --user root devcontainer bash -c "colcon build"
