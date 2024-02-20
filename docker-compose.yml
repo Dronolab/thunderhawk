@@ -12,14 +12,7 @@ services:
       - /tmp/.Xauthority:/tmp/.Xauthority:rw
     environment:
       - QT_X11_NO_MITSHM=1
-      - XAUTHORITY=$XAUTHORITY
       - ROS_DOMAIN_ID=96
     command: sleep infinity
     network_mode: "host"
     privileged: true
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - capabilities: ["nvidia-compute"]
-              driver: nvidia
