@@ -10,6 +10,8 @@ services:
       - ./:/workspace/thunderhawk
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /tmp/.Xauthority:/tmp/.Xauthority:rw
+    devices:
+      - /dev/dri:/dev/dri
     environment:
       - QT_X11_NO_MITSHM=1
       - ROS_DOMAIN_ID=96
