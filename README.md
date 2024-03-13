@@ -15,6 +15,7 @@ wsl --install -d Ubuntu
 wsl --set-default Ubuntu 22.04
 ```
 1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop)
+2. Install [Nivida Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) and set nvidia runtime to default if you have an Nvidia GPU.
 2. Install [Visual Studio Code](https://code.visualstudio.com/)
 3. Install the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) and [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) extension in VSCode
 4. Clone and open the repository (Do on WSL2 if on Windows)
